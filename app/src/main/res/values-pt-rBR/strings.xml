@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ganhei na Mega</string>
+    <string name="title">Boa sorte!</string>
+    <string name="number_hint">Digite um número entre 6 e 15</string>
+    <string name="number_generator">Gerar números</string>
+</resources>
