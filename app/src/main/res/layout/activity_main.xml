@@ -50,6 +50,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/number_generator"
         app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="buttonClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvResult" />
 </androidx.constraintlayout.widget.ConstraintLayout>
