@@ -37,42 +37,43 @@ class MainActivity : AppCompatActivity() {
 
     private fun numberGenerator(text: String, txtResult: TextView) {
         // Validar quando o campo é vazio
-        if (text.isNotEmpty()) {
 
-            val qtd = text.toInt()
-
-            if (qtd in 6..15) {
-
-                val numbers = mutableSetOf<Int>()
-                val random = Random()
-
-                while(true) {
-                    val number = random.nextInt(60) // 0 .. 59
-                    numbers.add(number + 1)
-
-                    if (numbers.size == qtd)
-                        break
-                }
-
-                txtResult.text = numbers.joinToString(" - ")
-            }
-            else {
-                Toast.makeText(this, R.string.number_hint, Toast.LENGTH_LONG).show()
-            }
-        } else {
+        if (text.isEmpty()) {
             Toast.makeText(this, R.string.number_hint, Toast.LENGTH_LONG).show()
+            return
         }
+
+        val qtd = text.toInt()
+
+        if (qtd < 6 || qtd > 15) {
+            Toast.makeText(this, R.string.number_hint, Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val numbers = mutableSetOf<Int>()
+        val random = Random()
+
+        while (true) {
+            val number = random.nextInt(60) // 0 .. 59
+            numbers.add(number + 1)
+
+            if (numbers.size == qtd)
+                break
+        }
+
+        txtResult.text = numbers.joinToString(" - ")
+
 
         // validar se o campo informado é entre 6 e 15
     }
 
     //val buttonClickListeber = object :View.OnClickListener {
-      //  override fun onClick(p0: View?) {
-            //Ação
-        //}
+    //  override fun onClick(p0: View?) {
+    //Ação
+    //}
     //}
 
 //    fun buttonClicked(view: View) {
-        //Ação
+    //Ação
 //    }
 }
