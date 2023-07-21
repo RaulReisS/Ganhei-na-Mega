@@ -1,5 +1,7 @@
 package br.com.raulreis.ganheinamega
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,14 +12,22 @@ import android.widget.Toast
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var prefs : SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Buscar referência dos objetos
         val edtText = findViewById<EditText>(R.id.edtNumber)
         val txvResult = findViewById<TextView>(R.id.txvResult)
         val btnGenerate = findViewById<Button>(R.id.btnGenerate)
+
+        prefs = getSharedPreferences("db", Context.MODE_PRIVATE)
+        val result = prefs.getString("result", null)
+        if (result != null)
+            txvResult.text = "Ultima aposta: $result"
 
         // Opção 1: Evento de touch por XML
 
@@ -62,6 +72,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         txtResult.text = numbers.joinToString(" - ")
+
+        val editor = prefs.edit()
+        editor.putString("result", txtResult.text.toString())
+        // editor.commit() --> Salvar de forma síncrona (bloquear a interface) e
+        // retorna um booleano dizendo que foi gravado com sucesso ou não (dados simples)
+        // editot.apply() --> Salvar de forma asssíncrona (não bloqueia a interface) e
+        // mas não informa se foi gravado com sucesso ou não
+        editor.apply() // assimcrona
 
 
         // validar se o campo informado é entre 6 e 15
