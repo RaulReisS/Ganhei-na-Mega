@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -24,10 +23,20 @@ class MainActivity : AppCompatActivity() {
         val txvResult = findViewById<TextView>(R.id.txvResult)
         val btnGenerate = findViewById<Button>(R.id.btnGenerate)
 
+        // Obtendo dados locais
         prefs = getSharedPreferences("db", Context.MODE_PRIVATE)
         val result = prefs.getString("result", null)
+
+        // if --> let
+        /*
         if (result != null)
             txvResult.text = "Ultima aposta: $result"
+
+         */
+
+        result?.let {
+            txvResult.text = "Ultima aposta: $it"
+        }
 
         // Opção 1: Evento de touch por XML
 
@@ -80,6 +89,14 @@ class MainActivity : AppCompatActivity() {
         // editot.apply() --> Salvar de forma asssíncrona (não bloqueia a interface) e
         // mas não informa se foi gravado com sucesso ou não
         editor.apply() // assimcrona
+
+        // Alternativa: Escrita resumida, quando estamos agindo várias vezes sobre o mesmo objeto
+        /*
+        prefs.edit().apply {
+            putString("result, txtResult.text.toString())
+            apply()
+        }
+         */
 
 
         // validar se o campo informado é entre 6 e 15
