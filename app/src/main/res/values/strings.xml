@@ -3,4 +3,5 @@
     <string name="title">Good Luck!</string>
     <string name="number_hint">Input a number between 6 and 15</string>
     <string name="number_generator">Generate numbers</string>
+    <string name="last_game">Last game: %1$s</string>
 </resources>

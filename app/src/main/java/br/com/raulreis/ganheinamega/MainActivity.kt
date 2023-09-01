@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs : SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen()
+
         setContentView(R.layout.activity_main)
 
 
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
          */
 
         result?.let {
-            txvResult.text = "Ultima aposta: $it"
+            txvResult.text = getString(R.string.last_game, it)
         }
 
         // Opção 1: Evento de touch por XML
